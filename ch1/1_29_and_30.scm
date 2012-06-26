@@ -1,0 +1,15 @@
+(define (sum term a next b)
+  (define (iter a result)
+    (if (> a b)
+        result
+	(iter (next a) (+ result (term a)))))
+  (iter a 0))
+(define (simpson f a b n)
+  (define (inc x) (+ 1 x))
+  (define h (/ (- b a) n))
+  (define (get-term k)
+    (cond ((= k 0) (f a))
+	  ((= k n) (f b))
+	  (else 
+	    (* (if (even? k) 4 2) (f (+ a (* k h)))))))
+  (/ (* h (sum get-term 0 inc n)) 3))
