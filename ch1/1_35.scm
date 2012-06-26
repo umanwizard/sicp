@@ -1,4 +1,4 @@
-;the obvious proof that the golden ratio 1 + sqrt(5) is a fixed point of x \goesto 1 + 1/x has been omitted.
+;the obvious proof that the golden ratio (1 + sqrt(5))/2 is a fixed point of x \goesto 1 + 1/x has been omitted.
 
 ;copied from sicp
 (define tolerance 0.00001)
