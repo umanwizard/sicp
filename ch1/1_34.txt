@@ -1,0 +1,3 @@
+The implentation will give an error after attempting to evaluate (2 2), since "2" is not a procedure, because:
+
+(f f) ---> (f 2) ---> (2 2)
