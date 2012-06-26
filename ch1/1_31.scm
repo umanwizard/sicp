@@ -12,7 +12,7 @@
     (+ k (if (even? k) 2 1)))
   (define (denom-term k)
     (+ k (if (even? k) 1 2)))
-  (* 4 (product-rec (lambda (k) (/ (num-term k) (denom-term k))) 1 inc n)))
+  (* 4 (product-iter (lambda (k) (/ (num-term k) (denom-term k))) 1 inc n)))
 
 (define (product-iter f a next b)
   (let loop ((accum 1) (x a))
