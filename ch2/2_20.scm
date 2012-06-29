@@ -1,0 +1,5 @@
+(define (same-parity x . m)
+  (let loop ((acc '()) (xs m))
+    (cond ((null? xs) acc)
+	  ((= (modulo x 2) (modulo (car xs) 2)) (loop (append acc (list (car xs))) (cdr xs)))
+	  (else (loop acc (cdr xs))))))
