@@ -1,0 +1,35 @@
+(load "../sicp.scm")
+(define empty-board '())
+(define (check? r1 c1 r2 c2)
+  (or (= r1 r2)
+      (= c1 c2)
+      (= (abs (- r1 r2))
+	 (abs (- c1 c2)))))
+
+(define (safe-and-row board start-col desired-col)
+  (if (= start-col desired-col)
+	 (cons #t (car board))
+	 (let ((result (safe-and-row (cdr board) (add1 start-col) desired-col)))
+	   (cons (and (car result)
+		      (not (check? (car board) start-col (cdr result) desired-col)))
+		 (cdr result)))))
+
+(define (adjoin-position new-row rest-of-queens)
+  (append rest-of-queens (list new-row)))
+
+(define (safe? k positions)
+  (car (safe-and-row positions 1 k)))
+
+(define (queens board-size)
+  (define (queen-cols k)
+    (if (= k 0)
+      (list empty-board)
+      (filter
+	(lambda (positions) (safe? k positions))
+	(flatmap
+	  (lambda (rest-of-queens)
+	    (map (lambda (new-row)
+		   (adjoin-position new-row rest-of-queens))
+		 (enumerate-interval 1 board-size)))
+	  (queen-cols (- k 1))))))
+  (queen-cols board-size))
